@@ -14,93 +14,57 @@
   .topo {
     position:absolute; top:0; left:0; right:0; z-index:1000;
     background:linear-gradient(135deg,#1B6B3C,#0F4226);
-    padding:10px 16px;
-    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 16px; display:flex; align-items:center; justify-content:space-between;
     box-shadow:0 2px 12px rgba(0,0,0,0.3);
   }
   .topo-marca { display:flex; align-items:center; gap:10px; }
-  .topo-icone {
-    width:36px; height:36px; background:rgba(255,255,255,0.15);
-    border-radius:10px; display:flex; align-items:center;
-    justify-content:center; font-size:20px;
-  }
+  .topo-icone { width:36px; height:36px; background:rgba(255,255,255,0.15); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; }
   .topo-titulo { color:white; font-size:15px; font-weight:700; line-height:1.2; }
   .topo-sub { color:rgba(255,255,255,0.7); font-size:11px; }
-  .topo-chip {
-    background:rgba(255,255,255,0.15); color:white;
-    padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600;
-  }
+  .topo-chip { background:rgba(255,255,255,0.15); color:white; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; }
   .leaflet-top.leaflet-left .leaflet-control-zoom { margin-top:70px !important; }
-  .menu-botao {
-    position:absolute; top:66px; right:10px; z-index:900;
-    width:36px; height:36px; background:white; border-radius:10px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
-    display:flex; align-items:center; justify-content:center;
-    font-size:18px; cursor:pointer; user-select:none;
-  }
-  .menu-painel {
-    position:absolute; top:110px; right:10px; z-index:900;
-    background:white; border-radius:12px;
-    box-shadow:0 4px 20px rgba(0,0,0,0.18);
-    min-width:200px; overflow:hidden;
-    max-height:0; opacity:0;
-    transition:max-height 0.3s ease, opacity 0.2s ease;
-  }
+  .menu-botao { position:absolute; top:66px; right:10px; z-index:900; width:36px; height:36px; background:white; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; user-select:none; }
+  .menu-painel { position:absolute; top:110px; right:10px; z-index:900; background:white; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.18); min-width:200px; overflow:hidden; max-height:0; opacity:0; transition:max-height 0.3s ease, opacity 0.2s ease; }
   .menu-painel.aberto { max-height:500px; opacity:1; }
-  .menu-secao {
-    padding:8px 14px 4px; font-size:10px; font-weight:700;
-    letter-spacing:0.8px; color:#a0aec0; text-transform:uppercase;
-    border-bottom:1px solid #edf2f7;
-  }
-  .menu-item {
-    padding:10px 14px; font-size:13px; cursor:pointer;
-    display:flex; align-items:center; gap:9px; color:#2d3748;
-    transition:background 0.12s;
-  }
+  .menu-secao { padding:8px 14px 4px; font-size:10px; font-weight:700; letter-spacing:0.8px; color:#a0aec0; text-transform:uppercase; border-bottom:1px solid #edf2f7; }
+  .menu-item { padding:10px 14px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:9px; color:#2d3748; transition:background 0.12s; }
   .menu-item:hover { background:#f7fafc; }
   .menu-item.ativo { background:#ebf8ff; font-weight:700; color:#2b6cb0; }
   .menu-item .bolinha { width:12px; height:12px; border-radius:50%; flex-shrink:0; border:2px solid rgba(0,0,0,0.12); }
-  .menu-item .qtd {
-    margin-left:auto; background:#edf2f7; color:#4a5568;
-    font-size:11px; padding:1px 7px; border-radius:20px; font-weight:700;
-  }
+  .menu-item .qtd { margin-left:auto; background:#edf2f7; color:#4a5568; font-size:11px; padding:1px 7px; border-radius:20px; font-weight:700; }
   .menu-item.ativo .qtd { background:#bee3f8; color:#2b6cb0; }
-  .legenda {
-    position:absolute; bottom:20px; right:10px; z-index:900;
-    background:white; border-radius:12px; padding:12px 14px;
-    box-shadow:0 2px 12px rgba(0,0,0,0.15); min-width:130px;
-  }
+  .legenda { position:absolute; bottom:20px; right:10px; z-index:900; background:white; border-radius:12px; padding:12px 14px; box-shadow:0 2px 12px rgba(0,0,0,0.15); min-width:130px; }
   .legenda-titulo { font-size:10px; font-weight:700; color:#a0aec0; text-transform:uppercase; margin-bottom:8px; }
   .legenda-linha { display:flex; align-items:center; gap:8px; font-size:12px; color:#2d3748; margin-bottom:5px; }
   .legenda-bolinha { width:11px; height:11px; border-radius:50%; border:2px solid rgba(0,0,0,0.12); flex-shrink:0; }
-  .legenda-calor { width:100%; height:10px; border-radius:5px; margin:6px 0 4px;
-    background:linear-gradient(to right,rgba(49,130,206,0.5),rgba(56,161,105,0.6),rgba(214,158,46,0.7),rgba(229,62,62,0.8)); }
+  .legenda-calor { width:100%; height:10px; border-radius:5px; margin:6px 0 4px; background:linear-gradient(to right,rgba(49,130,206,0.5),rgba(56,161,105,0.6),rgba(214,158,46,0.7),rgba(229,62,62,0.8)); }
   .legenda-calor-labs { display:flex; justify-content:space-between; font-size:10px; color:#718096; }
-  .leaflet-popup-content-wrapper {
-    border-radius:12px !important; padding:0 !important;
-    overflow:hidden; min-width:200px; box-shadow:0 8px 24px rgba(0,0,0,0.15) !important;
-  }
+
+  /* ── Popup com foto ── */
+  .leaflet-popup-content-wrapper { border-radius:12px !important; padding:0 !important; overflow:hidden; min-width:220px; max-width:260px; box-shadow:0 8px 24px rgba(0,0,0,0.15) !important; }
   .leaflet-popup-content { margin:0 !important; width:auto !important; }
   .popup-header { padding:10px 14px 8px; color:white; font-weight:700; font-size:13px; }
+  .popup-foto-wrap { width:100%; background:#f0f0f0; overflow:hidden; max-height:160px; }
+  .popup-foto { width:100%; height:160px; object-fit:cover; display:block; cursor:zoom-in; }
+  .popup-foto-erro { width:100%; height:80px; display:flex; align-items:center; justify-content:center; color:#a0aec0; font-size:12px; }
   .popup-body { padding:10px 14px 12px; background:white; font-size:12.5px; color:#2d3748; line-height:1.9; }
   .popup-row { display:flex; align-items:center; gap:7px; }
   .popup-row .ic { font-size:13px; width:16px; flex-shrink:0; }
   .popup-row .lb { color:#718096; font-size:11px; min-width:40px; }
   .popup-row .vl { font-weight:600; }
-  #loading {
-    position:fixed; inset:0; background:#1B6B3C;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    z-index:9999; color:white;
-  }
+
+  /* ── Overlay foto ampliada ── */
+  #foto-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center; cursor:zoom-out; }
+  #foto-overlay.ativo { display:flex; }
+  #foto-overlay img { max-width:95vw; max-height:92vh; border-radius:8px; box-shadow:0 8px 40px rgba(0,0,0,0.6); }
+
+  /* ── Loading / Erro ── */
+  #loading { position:fixed; inset:0; background:#1B6B3C; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9999; color:white; }
   #loading .icone { font-size:48px; margin-bottom:16px; animation:pulse 1.5s infinite; }
   #loading .texto { font-size:18px; font-weight:700; margin-bottom:8px; }
   #loading .sub { font-size:13px; opacity:0.7; }
   @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-  #erro {
-    display:none; position:fixed; inset:0; background:#1B6B3C;
-    flex-direction:column; align-items:center; justify-content:center;
-    z-index:9999; color:white; text-align:center; padding:24px;
-  }
+  #erro { display:none; position:fixed; inset:0; background:#1B6B3C; flex-direction:column; align-items:center; justify-content:center; z-index:9999; color:white; text-align:center; padding:24px; }
   #erro .icone { font-size:48px; margin-bottom:16px; }
   #erro .texto { font-size:18px; font-weight:700; margin-bottom:8px; }
   #erro .sub { font-size:13px; opacity:0.7; max-width:300px; }
@@ -118,6 +82,11 @@
   <div class="icone">⚠️</div>
   <div class="texto">Não foi possível carregar</div>
   <div class="sub" id="erro-msg">Verifique sua conexão e tente novamente.</div>
+</div>
+
+<!-- Overlay foto ampliada -->
+<div id="foto-overlay" onclick="fecharFoto()">
+  <img id="foto-overlay-img" src="" alt="Foto do local">
 </div>
 
 <div class="topo">
@@ -148,14 +117,30 @@ function corDoGrupo(g) {
 }
 
 const mapa = L.map('mapa', { zoomControl:true });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-  attribution:'© OpenStreetMap © CARTO', maxZoom:19
-}).addTo(mapa);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution:'© OpenStreetMap © CARTO', maxZoom:19 }).addTo(mapa);
 const tileLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', { maxZoom:19, pane:'overlayPane' });
+
+function abrirFoto(url) {
+  document.getElementById('foto-overlay-img').src = url;
+  document.getElementById('foto-overlay').classList.add('ativo');
+}
+function fecharFoto() {
+  document.getElementById('foto-overlay').classList.remove('ativo');
+  document.getElementById('foto-overlay-img').src = '';
+}
 
 function popupHtml(p) {
   const cor = corDoGrupo(p.grupo);
-  return `<div class="popup-header" style="background:${cor}">📍 Grupo ${p.grupo}</div>
+  const fotoHtml = p.foto_url
+    ? `<div class="popup-foto-wrap">
+         <img class="popup-foto" src="${p.foto_url}" alt="foto"
+              onerror="this.parentElement.innerHTML='<div class=\\'popup-foto-erro\\'>📷 Foto não disponível</div>'"
+              onclick="abrirFoto('${p.foto_url}')">
+       </div>`
+    : '';
+  return `
+    <div class="popup-header" style="background:${cor}">📍 Grupo ${p.grupo}</div>
+    ${fotoHtml}
     <div class="popup-body">
       <div class="popup-row"><span class="ic">📅</span><span class="lb">Data</span><span class="vl">${p.data||'—'}</span></div>
       <div class="popup-row"><span class="ic">⏰</span><span class="lb">Hora</span><span class="vl">${p.hora||'—'}</span></div>
@@ -170,7 +155,7 @@ function criarCamada(lista) {
     const m = L.circleMarker([p.latitude, p.longitude], { radius:9, color:'white', weight:2.5, fillColor:cor, fillOpacity:0.92 });
     m.on('mouseover', function(){ this.setStyle({radius:13, fillOpacity:1}); this.bringToFront(); });
     m.on('mouseout',  function(){ this.setStyle({radius:9,  fillOpacity:0.92}); });
-    m.bindPopup(popupHtml(p), { maxWidth:240 });
+    m.bindPopup(popupHtml(p), { maxWidth:260 });
     m.addTo(camada);
   });
   return camada;
@@ -210,6 +195,7 @@ async function carregarPontos() {
     longitude: parseFloat(row.c[3]?.v),
     data:      String(row.c[4]?.v ?? ''),
     hora:      String(row.c[5]?.v ?? ''),
+    foto_url:  String(row.c[6]?.v ?? ''),
   })).filter(p => !isNaN(p.latitude) && !isNaN(p.longitude));
 }
 
@@ -273,6 +259,7 @@ carregarPontos().then(pontos => {
 
 document.getElementById('menu-botao').addEventListener('click', e => { e.stopPropagation(); document.getElementById('menu-painel').classList.toggle('aberto'); });
 document.addEventListener('click', () => document.getElementById('menu-painel').classList.remove('aberto'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharFoto(); });
 </script>
 </body>
 </html>
