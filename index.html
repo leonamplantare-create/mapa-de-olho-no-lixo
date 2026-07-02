@@ -256,11 +256,9 @@
   </div>
 
   <div class="metricas">
-    <div class="metrica"><div class="metrica-label">Pontos mapeados</div><div class="metrica-valor mv-verde">59</div><div class="metrica-sub">1º mês de operação</div></div>
+    <div class="metrica"><div class="metrica-label">Pontos mapeados</div><div class="metrica-valor mv-verde">308</div><div class="metrica-sub">1º mês de operação</div></div>
     <div class="metrica"><div class="metrica-label">Equipes ativas</div><div class="metrica-valor mv-navy">5</div><div class="metrica-sub">Grupos 01–05</div></div>
-    <div class="metrica"><div class="metrica-label">Fotos processadas</div><div class="metrica-valor mv-verde">76</div><div class="metrica-sub">via Gemini + OCR</div></div>
-    <div class="metrica"><div class="metrica-label">Inconsistências</div><div class="metrica-valor mv-coral">2</div><div class="metrica-sub">aguardando revisão</div></div>
-    <div class="metrica"><div class="metrica-label">Duplicatas</div><div class="metrica-valor mv-dourado">3</div><div class="metrica-sub">coordenadas ≤ 5m</div></div>
+    <div class="metrica"><div class="metrica-label">Fotos processadas</div><div class="metrica-valor mv-verde">308</div><div class="metrica-sub">via Gemini + OCR</div></div>
   </div>
 
   <div class="grid2">
@@ -326,15 +324,7 @@
       </div>
       <div style="margin-top:16px;">
         <h3>🗺️ Mapa de Calor — Pontos de Lixo</h3>
-        <div class="mapa-fake" style="height:140px; margin-top:10px;">
-          <span class="pin" style="top:30%;left:25%">📍</span>
-          <span class="pin" style="top:50%;left:45%">📍</span>
-          <span class="pin" style="top:20%;left:60%">🔴</span>
-          <span class="pin" style="top:65%;left:70%">📍</span>
-          <span class="pin" style="top:40%;left:35%">🔴</span>
-          <span class="pin" style="top:55%;left:55%">📍</span>
-          <div class="mapa-label">Ilha de Itamaracá · 59 pontos</div>
-        </div>
+        <div id="mapa-admin" style="height:200px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);margin-top:10px;"></div>
       </div>
     </div>
   </div>
@@ -348,7 +338,7 @@
       <div class="log-item"><div class="log-hora">19:50</div><div class="log-icon">🤖</div><div class="log-texto"><strong>Processamento Gemini</strong> · Grupo 04 / foto01.jpeg · coordenadas extraídas com sucesso</div></div>
     </div>
   </div>
-</div>
+</div><!-- fim painel-admin -->
 
 <!-- ══════════════════════════════════════════════════════════════ -->
 <!-- PAINEL 2: PREFEITURA                                          -->
@@ -434,9 +424,9 @@
         <div id="mapa-prefeitura" style="width:100%;height:460px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);background:#e8f4f0;"></div>
         <div id="pref-menu-wrap" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"></div>
       </div>
-
-<!-- ══════════════════════════════════════════════════════════════ -->
-<!-- PAINEL 3: FUNCIONÁRIO DE CAMPO                               -->
+    </div><!-- fim grid2 prefeitura -->
+  </div>
+</div><!-- fim painel-prefeitura -->
 <!-- ══════════════════════════════════════════════════════════════ -->
 <div class="perfil-painel" id="painel-campo">
   <div class="perfil-header">
@@ -446,63 +436,128 @@
 
   <div class="status-grid" style="margin-bottom:20px;">
     <div class="status-box sb-coral"><div class="num" style="color:var(--coral)">3</div><div class="rot">Pendentes hoje</div></div>
-    <div class="status-box sb-verde"><div class="num" style="color:var(--verde)">2</div><div class="rot">Resolvidas hoje</div></div>
+    <div class="status-box sb-verde"><div class="num" style="color:var(--verde)">2</div><div class="rot">Concluídas hoje</div></div>
     <div class="status-box sb-azul"><div class="num" style="color:var(--azul-campo)">5</div><div class="rot">Total da semana</div></div>
     <div class="status-box sb-dourado"><div class="num" style="color:var(--dourado)">1</div><div class="rot">Em andamento</div></div>
   </div>
 
   <div class="grid2">
-    <div class="card">
-      <h3>📋 Ocorrências atribuídas</h3>
-      <div class="ocorr-lista">
-        <div class="ocorr-item" style="border-left: 3px solid var(--coral);">
-          <div class="ocorr-info">
-            <div class="ocorr-local">🔴 Rua Bruto, 113 — Biquinha</div>
-            <div class="ocorr-det">-7.7490153, -34.8344203 · Registrado 13/06</div>
+    <!-- Coluna esquerda: ocorrências + registrar -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <div class="card">
+        <h3>📋 Próximas ocorrências</h3>
+        <div class="ocorr-lista">
+          <div class="ocorr-item" style="border-left:3px solid var(--coral);">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fdecea;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🗑️</div>
+            <div class="ocorr-info">
+              <div class="ocorr-local">Rua Bruto, 113 — Biquinha</div>
+              <div class="ocorr-det">📍 350m de distância · Registrado 13/06</div>
+            </div>
+            <span class="badge badge-pend">Pendente</span>
           </div>
-          <span class="badge badge-pend">Pendente</span>
-        </div>
-        <div class="ocorr-item" style="border-left: 3px solid var(--dourado);">
-          <div class="ocorr-info">
-            <div class="ocorr-local">🟡 Sossego — Ilha de Itamaracá</div>
-            <div class="ocorr-det">-7.7231120, -34.8330060 · Registrado 22/06</div>
+          <div class="ocorr-item" style="border-left:3px solid var(--dourado);">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fef9e7;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">♻️</div>
+            <div class="ocorr-info">
+              <div class="ocorr-local">Sossego — Ilha de Itamaracá</div>
+              <div class="ocorr-det">📍 780m de distância · Registrado 22/06</div>
+            </div>
+            <span class="badge badge-camp">Em campo</span>
           </div>
-          <span class="badge badge-camp">Em andamento</span>
-        </div>
-        <div class="ocorr-item" style="border-left: 3px solid var(--coral);">
-          <div class="ocorr-info">
-            <div class="ocorr-local">🔴 Centro — Rua Principal</div>
-            <div class="ocorr-det">-7.7350000, -34.8400000 · Registrado 21/06</div>
+          <div class="ocorr-item" style="border-left:3px solid var(--coral);">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fdecea;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🚮</div>
+            <div class="ocorr-info">
+              <div class="ocorr-local">Centro — Rua Principal</div>
+              <div class="ocorr-det">📍 1.2km de distância · Registrado 21/06</div>
+            </div>
+            <span class="badge badge-pend">Pendente</span>
           </div>
-          <span class="badge badge-pend">Pendente</span>
         </div>
       </div>
-    </div>
 
-    <div style="display:flex; flex-direction:column; gap:12px;">
       <div class="card">
         <h3>✅ Registrar limpeza concluída</h3>
-        <div class="foto-upload">
-          <span class="icone">📸</span>
-          Tirar foto do local limpo
+
+        <!-- Upload de foto com preview visual -->
+        <input type="file" id="campo-foto-input" accept="image/*" capture="environment" style="display:none;" onchange="campoPreviewFoto(this)">
+        <div id="campo-foto-area" onclick="document.getElementById('campo-foto-input').click()"
+          style="border:2px dashed #c6d9ce;border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:#f7faf8;margin-bottom:12px;transition:all 0.2s;"
+          onmouseover="this.style.borderColor='var(--verde)'" onmouseout="this.style.borderColor='#c6d9ce'">
+          <div id="campo-foto-placeholder">
+            <div style="font-size:2.2rem;margin-bottom:6px;">📸</div>
+            <div style="font-weight:600;font-size:0.9rem;color:var(--verde);">Tirar foto do local limpo</div>
+            <div style="font-size:0.72rem;color:var(--text2);margin-top:4px;">Toque para abrir a câmera</div>
+          </div>
+          <img id="campo-foto-preview" style="display:none;width:100%;border-radius:10px;max-height:180px;object-fit:cover;" src="" alt="preview">
         </div>
-        <div style="background:var(--areia); border-radius:10px; padding:10px 12px; font-size:0.78rem; color:var(--text2); margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-          <span>📍</span> GPS: -7.7231120, -34.8330060 · detectado automaticamente
+
+        <!-- GPS simulado -->
+        <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;border:1px solid #c8e6c9;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#1B6B3C;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">📍</div>
+          <div>
+            <div style="font-size:0.78rem;font-weight:700;color:#1B6B3C;">GPS Detectado</div>
+            <div style="font-size:0.7rem;color:var(--text2);">-7.7231120, -34.8330060 · Precisão: ±3m</div>
+          </div>
+          <div style="margin-left:auto;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#1B6B3C;display:inline-block;animation:pulse 2s infinite;"></span>
+          </div>
         </div>
-        <button class="btn-acao btn-verde">✅ Confirmar limpeza concluída</button>
+
+        <!-- Observação -->
+        <textarea placeholder="Observação sobre a limpeza (opcional)..."
+          style="width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:0.82rem;font-family:inherit;resize:none;height:70px;margin-bottom:12px;box-sizing:border-box;"></textarea>
+
+        <button onclick="campoConfirmar(this)"
+          style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#1B6B3C,#2e8b5a);color:white;font-weight:700;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+          ✅ Confirmar limpeza concluída
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Coluna direita: mapa -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card" style="flex:1;">
+        <h3>🗺️ Mapa — Pontos mais próximos</h3>
+        <div id="mapa-campo" style="height:320px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);"></div>
+        <div style="font-size:11px;color:var(--text2);margin-top:6px;display:flex;align-items:center;gap:6px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#1B6B3C;display:inline-block;"></span>
+          Sua localização detectada automaticamente
+        </div>
       </div>
 
       <div class="card">
-        <h3>🗺️ Navegação até o ponto</h3>
-        <div class="mapa-fake" style="height:130px;">
-          <span class="pin" style="top:40%;left:50%">📍</span>
-          <span class="pin" style="top:65%;left:30%">🧭</span>
-          <div class="mapa-label">1.2 km · ~15 min a pé</div>
+        <h3>📈 Seu desempenho esta semana</h3>
+        <div style="display:flex;gap:10px;">
+          <div style="flex:1;text-align:center;background:#e8f5e9;border-radius:10px;padding:12px;">
+            <div style="font-size:1.8rem;font-weight:700;color:#1B6B3C;font-family:'Fredoka',sans-serif;">5</div>
+            <div style="font-size:0.7rem;color:var(--text2);">Concluídas</div>
+          </div>
+          <div style="flex:1;text-align:center;background:#fff8e1;border-radius:10px;padding:12px;">
+            <div style="font-size:1.8rem;font-weight:700;color:#E3B23C;font-family:'Fredoka',sans-serif;">3</div>
+            <div style="font-size:0.7rem;color:var(--text2);">Pendentes</div>
+          </div>
+          <div style="flex:1;text-align:center;background:#e3f2fd;border-radius:10px;padding:12px;">
+            <div style="font-size:1.8rem;font-weight:700;color:#1565C0;font-family:'Fredoka',sans-serif;">8</div>
+            <div style="font-size:0.7rem;color:var(--text2);">Este mês</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Modal de confirmação (enfeite visual) -->
+  <div id="campo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:white;border-radius:20px;padding:32px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+      <div style="font-weight:700;font-size:1.1rem;color:#1B6B3C;margin-bottom:8px;">Limpeza registrada!</div>
+      <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">Ocorrência marcada como concluída com sucesso.</div>
+      <button onclick="document.getElementById('campo-modal').style.display='none'"
+        style="background:#1B6B3C;color:white;border:none;border-radius:10px;padding:10px 28px;font-weight:700;cursor:pointer;">OK</button>
+    </div>
+  </div>
+
+</div><!-- fim painel-campo -->
 
 <!-- ══════════════════════════════════════════════════════════════ -->
 <!-- PAINEL 4: POPULAÇÃO                                          -->
@@ -513,61 +568,97 @@
     <p>Denuncie pontos de lixo · Acompanhe as limpezas · Itamaracá mais limpa com sua ajuda</p>
   </div>
 
+  <!-- Números de impacto -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+    <div style="background:linear-gradient(135deg,#1B6B3C,#2e8b5a);border-radius:14px;padding:16px;text-align:center;color:white;">
+      <div style="font-size:2rem;font-weight:700;font-family:'Fredoka',sans-serif;">308</div>
+      <div style="font-size:0.72rem;opacity:0.85;">Pontos mapeados</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#E2734A,#c0552e);border-radius:14px;padding:16px;text-align:center;color:white;">
+      <div style="font-size:2rem;font-weight:700;font-family:'Fredoka',sans-serif;">124</div>
+      <div style="font-size:0.72rem;opacity:0.85;">Pendentes</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#0E3B54,#1565C0);border-radius:14px;padding:16px;text-align:center;color:white;">
+      <div style="font-size:2rem;font-weight:700;font-family:'Fredoka',sans-serif;">184</div>
+      <div style="font-size:0.72rem;opacity:0.85;">Registrados</div>
+    </div>
+  </div>
+
   <div class="grid2">
+    <!-- Coluna esquerda: formulário de denúncia -->
     <div class="card">
       <h3>📢 Denunciar ponto de lixo</h3>
-      <div class="form-denuncia">
-        <div class="foto-upload">
-          <span class="icone">📷</span>
-          Tire uma foto do local
-          <div style="font-size:0.65rem; margin-top:4px; color:var(--text2);">O GPS será capturado automaticamente</div>
+
+      <!-- Upload foto com preview -->
+      <input type="file" id="pop-foto-input" accept="image/*" capture="environment" style="display:none;" onchange="popPreviewFoto(this)">
+      <div id="pop-foto-area" onclick="document.getElementById('pop-foto-input').click()"
+        style="border:2px dashed #f0c4b4;border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:#fff8f6;margin-bottom:14px;transition:all 0.2s;position:relative;"
+        onmouseover="this.style.borderColor='var(--coral)'" onmouseout="this.style.borderColor='#f0c4b4'">
+        <div id="pop-foto-placeholder">
+          <div style="font-size:2.4rem;margin-bottom:6px;">📷</div>
+          <div style="font-weight:700;font-size:0.9rem;color:var(--coral);">Fotografar o local</div>
+          <div style="font-size:0.72rem;color:var(--text2);margin-top:4px;">Toque aqui para abrir a câmera</div>
         </div>
-        <label>Descrição do problema</label>
-        <textarea rows="3" placeholder="Ex: Acúmulo de lixo na calçada próximo ao mercado..."></textarea>
-        <label>Tipo de resíduo</label>
-        <select>
-          <option>Lixo doméstico</option>
-          <option>Entulho / construção</option>
-          <option>Resíduos orgânicos</option>
-          <option>Lixo eletrônico</option>
-          <option>Outro</option>
-        </select>
-        <button class="btn-acao btn-coral" style="margin-top:4px;">📢 Enviar denúncia</button>
+        <img id="pop-foto-preview" style="display:none;width:100%;border-radius:10px;max-height:200px;object-fit:cover;" src="" alt="preview">
+        <div id="pop-foto-tag" style="display:none;position:absolute;bottom:10px;right:10px;background:#1B6B3C;color:white;font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700;">✅ Foto adicionada</div>
       </div>
+
+      <!-- GPS -->
+      <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:12px;padding:11px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;border:1px solid #c8e6c9;">
+        <span style="font-size:1.1rem;">📍</span>
+        <div style="flex:1;">
+          <div style="font-size:0.75rem;font-weight:700;color:#1B6B3C;">Localização capturada automaticamente</div>
+          <div style="font-size:0.68rem;color:var(--text2);">-7.7490153, -34.8344203</div>
+        </div>
+        <span style="width:8px;height:8px;border-radius:50%;background:#1B6B3C;display:inline-block;animation:pulse 2s infinite;"></span>
+      </div>
+
+      <!-- Descrição -->
+      <label style="font-size:0.72rem;font-weight:700;color:var(--text2);display:block;margin-bottom:4px;">Descrição do problema</label>
+      <textarea rows="3" placeholder="Ex: Acúmulo de lixo na calçada, próximo ao mercado da esquina..."
+        style="width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:0.82rem;font-family:inherit;resize:none;margin-bottom:10px;box-sizing:border-box;"></textarea>
+
+      <!-- Tipo -->
+      <label style="font-size:0.72rem;font-weight:700;color:var(--text2);display:block;margin-bottom:4px;">Tipo de resíduo</label>
+      <select style="width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:0.82rem;font-family:inherit;margin-bottom:14px;background:white;">
+        <option>🗑️ Lixo doméstico</option>
+        <option>🧱 Entulho / construção</option>
+        <option>🌿 Resíduos orgânicos</option>
+        <option>💻 Lixo eletrônico</option>
+        <option>⚠️ Outro</option>
+      </select>
+
+      <button onclick="popEnviar(this)"
+        style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--coral),#c0552e);color:white;font-weight:700;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+        📢 Enviar denúncia
+      </button>
     </div>
 
-    <div style="display:flex; flex-direction:column; gap:14px;">
+    <!-- Coluna direita: mapa + acompanhamento -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
       <div class="card">
-        <h3>📊 Situação da ilha</h3>
-        <div class="status-grid">
-          <div class="status-box sb-coral"><div class="num" style="color:var(--coral)">22</div><div class="rot">Pendentes</div></div>
-          <div class="status-box sb-verde"><div class="num" style="color:var(--verde)">31</div><div class="rot">Resolvidos</div></div>
+        <h3>🗺️ Pontos de lixo na ilha</h3>
+        <div id="mapa-populacao" style="height:240px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);"></div>
+        <div style="font-size:11px;color:var(--text2);margin-top:6px;display:flex;gap:12px;">
+          <span>🔴 Pendente</span><span>🟢 Registrado</span>
         </div>
       </div>
 
       <div class="card">
-        <h3>🗺️ Mapa de ocorrências</h3>
-        <div class="mapa-fake" style="height:150px;">
-          <span class="pin" style="top:30%;left:25%">🔴</span>
-          <span class="pin" style="top:50%;left:45%">✅</span>
-          <span class="pin" style="top:20%;left:60%">🔴</span>
-          <span class="pin" style="top:65%;left:70%">✅</span>
-          <span class="pin" style="top:40%;left:35%">✅</span>
-          <div class="mapa-label">Toque no mapa para ver detalhes</div>
+        <h3>📌 Acompanhe sua última denúncia</h3>
+        <div style="background:#f8fffe;border-radius:10px;padding:12px 14px;margin-bottom:12px;border:1px solid #e0f2f1;font-size:0.8rem;color:var(--text2);">
+          <span style="font-weight:700;color:#1B6B3C;">Protocolo:</span> DNÚ-2026-00847
         </div>
-      </div>
-
-      <div class="card">
-        <h3>📌 Acompanhe sua denúncia</h3>
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-dot tl-dot-verde"></div>
-            <div class="tl-titulo">Denúncia recebida</div>
+            <div class="tl-titulo">Denúncia recebida ✅</div>
             <div class="tl-data">27/06/2026 · 09:14</div>
           </div>
           <div class="tl-item">
             <div class="tl-dot tl-dot-dourado"></div>
-            <div class="tl-titulo">Atribuída ao agente José Silva</div>
+            <div class="tl-titulo">Atribuída ao agente</div>
             <div class="tl-data">27/06/2026 · 10:30</div>
           </div>
           <div class="tl-item">
@@ -577,6 +668,20 @@
           </div>
         </div>
       </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de sucesso denúncia -->
+  <div id="pop-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:white;border-radius:20px;padding:32px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <div style="font-weight:700;font-size:1.1rem;color:#1B6B3C;margin-bottom:8px;">Denúncia enviada!</div>
+      <div style="font-size:0.85rem;color:var(--text2);margin-bottom:6px;">Seu protocolo é:</div>
+      <div style="font-size:1rem;font-weight:700;color:var(--coral);margin-bottom:20px;">DNÚ-2026-00848</div>
+      <div style="font-size:0.78rem;color:var(--text2);margin-bottom:20px;">Você pode acompanhar o status aqui neste portal.</div>
+      <button onclick="document.getElementById('pop-modal').style.display='none'"
+        style="background:var(--coral);color:white;border:none;border-radius:10px;padding:10px 28px;font-weight:700;cursor:pointer;">OK</button>
     </div>
   </div>
 </div>
@@ -587,6 +692,9 @@
     document.querySelectorAll('.perfil-painel').forEach(p => p.classList.remove('ativo'));
     document.getElementById('tab-' + id).classList.add('ativo');
     document.getElementById('painel-' + id).classList.add('ativo');
+    if (id === 'admin')     setTimeout(iniciarMapaAdmin, 200);
+    if (id === 'campo')     setTimeout(iniciarMapaCampo, 200);
+    if (id === 'populacao') setTimeout(iniciarMapaPopulacao, 200);
   }
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -599,7 +707,128 @@
 </div>
 
 <script>
-// ── Configuração da planilha (igual ao site atual) ─────────────────────────
+// ── Funcionário de campo — preview foto e modal ────────────────────────────
+function campoPreviewFoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('campo-foto-placeholder').style.display = 'none';
+    const img = document.getElementById('campo-foto-preview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function campoConfirmar(btn) {
+  btn.textContent = '⏳ Enviando...';
+  btn.style.opacity = '0.7';
+  setTimeout(() => {
+    btn.textContent = '✅ Confirmar limpeza concluída';
+    btn.style.opacity = '1';
+    document.getElementById('campo-modal').style.display = 'flex';
+  }, 1200);
+}
+
+// ── População — preview foto e modal ──────────────────────────────────────
+function popPreviewFoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('pop-foto-placeholder').style.display = 'none';
+    const img = document.getElementById('pop-foto-preview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    document.getElementById('pop-foto-tag').style.display = 'block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function popEnviar(btn) {
+  btn.textContent = '⏳ Enviando...';
+  btn.style.opacity = '0.7';
+  setTimeout(() => {
+    btn.textContent = '📢 Enviar denúncia';
+    btn.style.opacity = '1';
+    document.getElementById('pop-modal').style.display = 'flex';
+  }, 1400);
+}
+
+let _pontosCache = null;
+async function _getPontos() {
+  if (_pontosCache) return _pontosCache;
+  const url = `https://docs.google.com/spreadsheets/d/${PREF_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(PREF_SHEET_ABA)}`;
+  const resp = await fetch(url);
+  const texto = await resp.text();
+  const json  = JSON.parse(texto.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+  _pontosCache = json.table.rows.map(row => ({
+    grupo:     String(row.c[0]?.v ?? ''),
+    latitude:  parseFloat(row.c[2]?.v),
+    longitude: parseFloat(row.c[3]?.v),
+    data:      String(row.c[4]?.v ?? ''),
+    foto_url:  String(row.c[6]?.v ?? ''),
+  })).filter(p => !isNaN(p.latitude) && !isNaN(p.longitude));
+  return _pontosCache;
+}
+
+function _tilesBase(map) {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution:'© OpenStreetMap © CARTO', maxZoom:19
+  }).addTo(map);
+}
+function _fitBounds(map, pontos) {
+  if (!pontos.length) return;
+  const lats = pontos.map(p=>p.latitude), lons = pontos.map(p=>p.longitude);
+  map.fitBounds([[Math.min(...lats),Math.min(...lons)],[Math.max(...lats),Math.max(...lons)]],{padding:[20,20]});
+}
+
+// Admin — mapa de calor
+let _mapaAdminOk = false;
+async function iniciarMapaAdmin() {
+  if (_mapaAdminOk) return; _mapaAdminOk = true;
+  const map = L.map('mapa-admin').setView([-7.75,-34.84],13);
+  _tilesBase(map);
+  const pontos = await _getPontos().catch(()=>[]);
+  if (pontos.length) {
+    L.heatLayer(pontos.map(p=>[p.latitude,p.longitude,1]),{radius:28,blur:20,minOpacity:0.3}).addTo(map);
+    _fitBounds(map, pontos);
+  }
+  setTimeout(()=>map.invalidateSize(),100);
+}
+
+// Campo — mostra pontos com popup simples
+let _mapaCampoOk = false;
+async function iniciarMapaCampo() {
+  if (_mapaCampoOk) return; _mapaCampoOk = true;
+  const map = L.map('mapa-campo').setView([-7.75,-34.84],14);
+  _tilesBase(map);
+  const pontos = await _getPontos().catch(()=>[]);
+  pontos.forEach(p => {
+    L.circleMarker([p.latitude,p.longitude],{radius:7,color:'white',weight:2,fillColor:prefCorDoGrupo(p.grupo),fillOpacity:0.9})
+     .bindPopup(`<b>Grupo ${p.grupo}</b><br>${p.data}`)
+     .addTo(map);
+  });
+  if (pontos.length) _fitBounds(map, pontos);
+  setTimeout(()=>map.invalidateSize(),100);
+}
+
+// População — pontos simples clicáveis
+let _mapaPopOk = false;
+async function iniciarMapaPopulacao() {
+  if (_mapaPopOk) return; _mapaPopOk = true;
+  const map = L.map('mapa-populacao').setView([-7.75,-34.84],13);
+  _tilesBase(map);
+  const pontos = await _getPontos().catch(()=>[]);
+  pontos.forEach(p => {
+    L.circleMarker([p.latitude,p.longitude],{radius:6,color:'white',weight:1.5,fillColor:'#E2734A',fillOpacity:0.85})
+     .bindPopup(`<b>Ponto de lixo</b><br>Grupo ${p.grupo}<br>${p.data}`)
+     .addTo(map);
+  });
+  if (pontos.length) _fitBounds(map, pontos);
+  setTimeout(()=>map.invalidateSize(),100);
+}
+
+// Inicia admin ao abrir a página (aba padrão)
+document.addEventListener('DOMContentLoaded', () => setTimeout(iniciarMapaAdmin, 300));
+
 const PREF_SHEET_ID  = '1Q9hG2uVnnP0kbKCdiVjUWwhW6Bi9TjajEYXS0dlZMsk';
 const PREF_SHEET_ABA = 'Coordenadas';
 
