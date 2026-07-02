@@ -323,8 +323,13 @@
         <div class="barra-col"><div class="barra-col-bar" style="height:94%"></div><div class="barra-col-label">G05</div></div>
       </div>
       <div style="margin-top:16px;">
-        <h3>🗺️ Mapa de Calor — Pontos de Lixo</h3>
-        <div id="mapa-admin" style="height:200px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);margin-top:10px;"></div>
+        <h3>🗺️ Mapa — Pontos de Lixo</h3>
+        <div style="display:flex;gap:8px;margin:8px 0;flex-wrap:wrap;align-items:center;">
+          <span id="admin-chip-total" style="background:#1B6B3C;color:white;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;">carregando...</span>
+          <button onclick="adminCentralizar()" style="margin-left:auto;background:#1B6B3C;color:white;border:none;border-radius:8px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;">📍 Centralizar</button>
+        </div>
+        <div id="mapa-admin" style="height:340px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);margin-top:6px;background:#e8f4f0;"></div>
+        <div id="admin-menu-wrap" style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;"></div>
       </div>
     </div>
   </div>
@@ -420,6 +425,7 @@
           <span id="pref-chip-total" style="background:#1B6B3C;color:white;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;">carregando...</span>
           <span style="font-size:11px;color:var(--text2);">Clique num ponto para ver a foto e os detalhes</span>
           <span id="pref-chip-erro" style="display:none;color:var(--coral);font-size:12px;"></span>
+          <button onclick="prefCentralizar()" style="margin-left:auto;background:#1B6B3C;color:white;border:none;border-radius:8px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;">📍 Centralizar</button>
         </div>
         <div id="mapa-prefeitura" style="width:100%;height:460px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);background:#e8f4f0;"></div>
         <div id="pref-menu-wrap" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"></div>
@@ -780,18 +786,92 @@ function _fitBounds(map, pontos) {
   map.fitBounds([[Math.min(...lats),Math.min(...lons)],[Math.max(...lats),Math.max(...lons)]],{padding:[20,20]});
 }
 
-// Admin — mapa de calor
+// Admin — mapa completo igual ao da prefeitura
 let _mapaAdminOk = false;
+let _mapaAdminObj = null;
+let _adminBounds = null;
+let _prefBounds = null;
+
 async function iniciarMapaAdmin() {
-  if (_mapaAdminOk) return; _mapaAdminOk = true;
+  if (_mapaAdminOk) { if (_mapaAdminObj) _mapaAdminObj.invalidateSize(); return; }
+  _mapaAdminOk = true;
+
   const map = L.map('mapa-admin').setView([-7.75,-34.84],13);
-  _tilesBase(map);
+  _mapaAdminObj = map;
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution:'© OpenStreetMap © CARTO', maxZoom:19
+  }).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
+    { maxZoom:19, pane:'overlayPane' }).addTo(map);
+
   const pontos = await _getPontos().catch(()=>[]);
-  if (pontos.length) {
-    L.heatLayer(pontos.map(p=>[p.latitude,p.longitude,1]),{radius:28,blur:20,minOpacity:0.3}).addTo(map);
-    _fitBounds(map, pontos);
+  document.getElementById('admin-chip-total').textContent = pontos.length + ' pontos registrados';
+
+  const grupos = [...new Set(pontos.map(p => p.grupo))].sort();
+  grupos.forEach(g => prefCorDoGrupo(g));
+
+  const camadaTodos = prefCriarCamada(map, pontos);
+  const camadasPorGrupo = {};
+  grupos.forEach(g => { camadasPorGrupo[g] = prefCriarCamada(map, pontos.filter(p => p.grupo === g)); });
+  const camadaCalor = L.heatLayer(pontos.map(p => [p.latitude, p.longitude, 1.0]),
+    { radius:30, blur:24, minOpacity:0.3 });
+
+  let adminCamadaAtiva = camadaTodos;
+  camadaTodos.addTo(map);
+
+  if (pontos.length > 0) {
+    const lats = pontos.map(p=>p.latitude), lons = pontos.map(p=>p.longitude);
+    _adminBounds = [[Math.min(...lats),Math.min(...lons)],[Math.max(...lats),Math.max(...lons)]];
+    map.fitBounds(_adminBounds, {padding:[30,30]});
   }
-  setTimeout(()=>map.invalidateSize(),100);
+
+  const menuWrap = document.getElementById('admin-menu-wrap');
+  const btnS = (a) => `cursor:pointer;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;border:none;background:${a?'#1B6B3C':'#edf2f7'};color:${a?'white':'#4a5568'};`;
+
+  const btnTodos = document.createElement('button');
+  btnTodos.textContent = '📍 Todos (' + pontos.length + ')';
+  btnTodos.style.cssText = btnS(true);
+  btnTodos.onclick = () => {
+    if (adminCamadaAtiva) map.removeLayer(adminCamadaAtiva);
+    adminCamadaAtiva = camadaTodos; camadaTodos.addTo(map);
+    [...menuWrap.children].forEach(b => b.style.cssText = btnS(false));
+    btnTodos.style.cssText = btnS(true);
+  };
+  menuWrap.appendChild(btnTodos);
+
+  const btnCalor = document.createElement('button');
+  btnCalor.textContent = '🔥 Calor';
+  btnCalor.style.cssText = btnS(false);
+  btnCalor.onclick = () => {
+    if (adminCamadaAtiva) map.removeLayer(adminCamadaAtiva);
+    adminCamadaAtiva = camadaCalor; camadaCalor.addTo(map);
+    [...menuWrap.children].forEach(b => b.style.cssText = btnS(false));
+    btnCalor.style.cssText = btnS(true);
+  };
+  menuWrap.appendChild(btnCalor);
+
+  grupos.forEach(g => {
+    const qtd = pontos.filter(p => p.grupo === g).length;
+    const btn = document.createElement('button');
+    btn.style.cssText = btnS(false);
+    btn.innerHTML = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${prefCorDoGrupo(g)};margin-right:5px;"></span>G${g} (${qtd})`;
+    btn.onclick = () => {
+      if (adminCamadaAtiva) map.removeLayer(adminCamadaAtiva);
+      adminCamadaAtiva = camadasPorGrupo[g]; camadasPorGrupo[g].addTo(map);
+      [...menuWrap.children].forEach(b => b.style.cssText = btnS(false));
+      btn.style.cssText = btnS(true);
+    };
+    menuWrap.appendChild(btn);
+  });
+
+  setTimeout(() => map.invalidateSize(), 200);
+}
+
+function adminCentralizar() {
+  if (_mapaAdminObj && _adminBounds) _mapaAdminObj.fitBounds(_adminBounds, {padding:[30,30]});
+}
+function prefCentralizar() {
+  if (prefMapaObj && _prefBounds) prefMapaObj.fitBounds(_prefBounds, {padding:[30,30]});
 }
 
 // Campo — mostra pontos com popup simples
@@ -941,8 +1021,9 @@ function iniciarMapaPrefeitura() {
     if (pontos.length > 0) {
       const lats = pontos.map(p => p.latitude);
       const lons = pontos.map(p => p.longitude);
-      map.fitBounds([[Math.min(...lats), Math.min(...lons)],
-                     [Math.max(...lats), Math.max(...lons)]], { padding:[40,40] });
+      _prefBounds = [[Math.min(...lats), Math.min(...lons)],
+                     [Math.max(...lats), Math.max(...lons)]];
+      map.fitBounds(_prefBounds, { padding:[40,40] });
     }
 
     // Botões de filtro por grupo
