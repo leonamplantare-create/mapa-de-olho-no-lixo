@@ -983,16 +983,16 @@ function iniciarMapaPrefeitura() {
     maxZoom:19, pane:'overlayPane'
   });
 
-  prefCarregarPontos().then(pontos => {
-    // 1. Número travado em 400 pontos registrados
+  // Usando _getPontos() que já existe no código para buscar os dados corretamente
+  _getPontos().then(pontos => {
+    // 1. Número cravado em 400 pontos
     document.getElementById('pref-chip-total').textContent = '400 pontos registrados';
 
     const grupos = [...new Set(pontos.map(p => p.grupo))].sort();
     
-    // 2. Definindo o vermelho padrão para todos os pontos da prefeitura
-    const corPrefeitura = '#E53E3E'; // Vermelho
+    // 2. Cor vermelha fixa para todos os pontos deste mapa
+    const corPrefeitura = '#E53E3E'; 
 
-    // Passamos a cor vermelha para substituir as cores dos grupos apenas neste mapa
     const camadaTodos = prefCriarCamada(map, pontos, corPrefeitura);
     const camadasPorGrupo = {};
     grupos.forEach(g => { camadasPorGrupo[g] = prefCriarCamada(map, pontos.filter(p => p.grupo === g), corPrefeitura); });
@@ -1011,7 +1011,6 @@ function iniciarMapaPrefeitura() {
       map.fitBounds(_prefBounds, { padding:[40,40] });
     }
 
-    // Botões de filtro também adotando o padrão de cores unificado e o número 400 no botão Todos
     const menuWrap = document.getElementById('pref-menu-wrap');
     const btnStyle = (ativo) => `cursor:pointer;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;border:none;background:${ativo?corPrefeitura:'#edf2f7'};color:${ativo?'white':'#4a5568'};`;
     
