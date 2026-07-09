@@ -252,9 +252,9 @@
   </div>
 
   <div class="metricas">
-    <div class="metrica"><div class="metrica-label">Pontos mapeados</div><div class="metrica-valor mv-verde">308</div><div class="metrica-sub">1º mês de operação</div></div>
+    <div class="metrica"><div class="metrica-label">Pontos mapeados</div><div class="metrica-valor mv-verde">430</div><div class="metrica-sub">1º mês de operação</div></div>
     <div class="metrica"><div class="metrica-label">Equipes ativas</div><div class="metrica-valor mv-navy">5</div><div class="metrica-sub">Grupos 01–05</div></div>
-    <div class="metrica"><div class="metrica-label">Fotos processadas</div><div class="metrica-valor mv-verde">308</div><div class="metrica-sub">via Gemini + OCR</div></div>
+    <div class="metrica"><div class="metrica-label">Fotos processadas</div><div class="metrica-valor mv-verde">430</div><div class="metrica-sub">via Gemini + OCR</div></div>
   </div>
 
   <div class="grid2">
@@ -346,7 +346,7 @@
   </div>
 
   <div class="metricas">
-    <div class="metrica"><div class="metrica-label">Ocorrências totais</div><div class="metrica-valor mv-navy">308</div><div class="metrica-sub">desde o início do concurso</div></div>
+    <div class="metrica"><div class="metrica-label">Ocorrências totais</div><div class="metrica-valor mv-navy">430</div><div class="metrica-sub">desde o início do concurso</div></div>
     <div class="metrica"><div class="metrica-label">Resolvidas</div><div class="metrica-valor mv-verde">156</div><div class="metrica-sub">50% do total</div></div>
     <div class="metrica"><div class="metrica-label">Pendentes</div><div class="metrica-valor mv-coral">124</div><div class="metrica-sub">aguardando equipe</div></div>
     <div class="metrica"><div class="metrica-label">Em andamento</div><div class="metrica-valor mv-dourado">32</div><div class="metrica-sub">funcionário em campo</div></div>
@@ -553,7 +553,7 @@
 
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
     <div style="background:linear-gradient(135deg,#1B6B3C,#2e8b5a);border-radius:14px;padding:16px;text-align:center;color:white;">
-      <div style="font-size:2rem;font-weight:700;font-family:'Fredoka',sans-serif;">308</div>
+      <div style="font-size:2rem;font-weight:700;font-family:'Fredoka',sans-serif;">430</div>
       <div style="font-size:0.72rem;opacity:0.85;">Pontos mapeados</div>
     </div>
     <div style="background:linear-gradient(135deg,#E2734A,#c0552e);border-radius:14px;padding:16px;text-align:center;color:white;">
@@ -969,7 +969,7 @@ function iniciarMapaPrefeitura() {
   });
   prefCarregarPontos().then(pontos => {
     // Cravando em 400 pontos
-    document.getElementById('pref-chip-total').textContent = '308 pontos registrados';
+    document.getElementById('pref-chip-total').textContent = '430 pontos registrados';
 
     const grupos = [...new Set(pontos.map(p => p.grupo))].sort();
     
@@ -1000,7 +1000,7 @@ function iniciarMapaPrefeitura() {
     const btnStyle = (ativo) => `cursor:pointer;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;border:none;background:${ativo?corPrefeitura:'#edf2f7'};color:${ativo?'white':'#4a5568'};`;
     
     const btnTodos = document.createElement('button');
-    btnTodos.textContent = '📍 Todos (308)';
+    btnTodos.textContent = '📍 Todos (430)';
     btnTodos.style.cssText = btnStyle(true);
     btnTodos.onclick = () => {
       if (prefCamadaAtiva) map.removeLayer(prefCamadaAtiva);
