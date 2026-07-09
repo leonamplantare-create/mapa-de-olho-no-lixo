@@ -220,7 +220,6 @@
 </head>
 <body>
 
-<!-- TOPO -->
 <div class="topo">
   <div class="topo-marca">
     <div class="topo-logo">👁️</div>
@@ -246,9 +245,6 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════════ -->
-<!-- PAINEL 1: UNIVERSIDADE / ADMIN                                -->
-<!-- ══════════════════════════════════════════════════════════════ -->
 <div class="perfil-painel ativo" id="painel-admin">
   <div class="perfil-header">
     <h2>Dashboard de Auditoria — Concurso Fotográfico</h2>
@@ -256,9 +252,9 @@
   </div>
 
   <div class="metricas">
-    <div class="metrica"><div class="metrica-label">Pontos mapeados</div><div class="metrica-valor mv-verde">312</div><div class="metrica-sub">1º mês de operação</div></div>
+    <div class="metrica"><div class="metrica-label">Pontos mapeados</div><div class="metrica-valor mv-verde">308</div><div class="metrica-sub">1º mês de operação</div></div>
     <div class="metrica"><div class="metrica-label">Equipes ativas</div><div class="metrica-valor mv-navy">5</div><div class="metrica-sub">Grupos 01–05</div></div>
-    <div class="metrica"><div class="metrica-label">Fotos processadas</div><div class="metrica-valor mv-verde">312</div><div class="metrica-sub">via Gemini + OCR</div></div>
+    <div class="metrica"><div class="metrica-label">Fotos processadas</div><div class="metrica-valor mv-verde">308</div><div class="metrica-sub">via Gemini + OCR</div></div>
   </div>
 
   <div class="grid2">
@@ -343,19 +339,14 @@
       <div class="log-item"><div class="log-hora">19:50</div><div class="log-icon">🤖</div><div class="log-texto"><strong>Processamento Gemini</strong> · Grupo 04 / foto01.jpeg · coordenadas extraídas com sucesso</div></div>
     </div>
   </div>
-</div><!-- fim painel-admin -->
-
-<!-- ══════════════════════════════════════════════════════════════ -->
-<!-- PAINEL 2: PREFEITURA                                          -->
-<!-- ══════════════════════════════════════════════════════════════ -->
-<div class="perfil-painel" id="painel-prefeitura">
+</div><div class="perfil-painel" id="painel-prefeitura">
   <div class="perfil-header">
     <h2>Painel de Gestão Ambiental</h2>
     <p>Prefeitura de Itamaracá · Secretaria de Meio Ambiente · Atualizado em tempo real</p>
   </div>
 
   <div class="metricas">
-    <div class="metrica"><div class="metrica-label">Ocorrências totais</div><div class="metrica-valor mv-navy">312</div><div class="metrica-sub">desde o início do concurso</div></div>
+    <div class="metrica"><div class="metrica-label">Ocorrências totais</div><div class="metrica-valor mv-navy">400</div><div class="metrica-sub">desde o início do concurso</div></div>
     <div class="metrica"><div class="metrica-label">Resolvidas</div><div class="metrica-valor mv-verde">156</div><div class="metrica-sub">50% do total</div></div>
     <div class="metrica"><div class="metrica-label">Pendentes</div><div class="metrica-valor mv-coral">124</div><div class="metrica-sub">aguardando equipe</div></div>
     <div class="metrica"><div class="metrica-label">Em andamento</div><div class="metrica-valor mv-dourado">32</div><div class="metrica-sub">funcionário em campo</div></div>
@@ -430,11 +421,8 @@
         <div id="mapa-prefeitura" style="width:100%;height:460px;border-radius:12px;overflow:hidden;border:1px solid var(--borda);background:#e8f4f0;"></div>
         <div id="pref-menu-wrap" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"></div>
       </div>
-    </div><!-- fim grid2 prefeitura -->
-  </div>
-</div><!-- fim painel-prefeitura -->
-<!-- ══════════════════════════════════════════════════════════════ -->
-<div class="perfil-painel" id="painel-campo">
+    </div></div>
+</div><div class="perfil-painel" id="painel-campo">
   <div class="perfil-header">
     <h2>Painel de Campo</h2>
     <p>Agente: José Silva · Secretaria de Limpeza Urbana · 27/06/2026</p>
@@ -448,7 +436,6 @@
   </div>
 
   <div class="grid2">
-    <!-- Coluna esquerda: ocorrências + registrar -->
     <div style="display:flex;flex-direction:column;gap:14px;">
 
       <div class="card">
@@ -484,7 +471,6 @@
       <div class="card">
         <h3>✅ Registrar limpeza concluída</h3>
 
-        <!-- Upload de foto com preview visual -->
         <input type="file" id="campo-foto-input" accept="image/*" capture="environment" style="display:none;" onchange="campoPreviewFoto(this)">
         <div id="campo-foto-area" onclick="document.getElementById('campo-foto-input').click()"
           style="border:2px dashed #c6d9ce;border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:#f7faf8;margin-bottom:12px;transition:all 0.2s;"
@@ -497,7 +483,6 @@
           <img id="campo-foto-preview" style="display:none;width:100%;border-radius:10px;max-height:180px;object-fit:cover;" src="" alt="preview">
         </div>
 
-        <!-- GPS simulado -->
         <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;border:1px solid #c8e6c9;">
           <div style="width:32px;height:32px;border-radius:50%;background:#1B6B3C;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">📍</div>
           <div>
@@ -509,7 +494,6 @@
           </div>
         </div>
 
-        <!-- Observação -->
         <textarea placeholder="Observação sobre a limpeza (opcional)..."
           style="width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:0.82rem;font-family:inherit;resize:none;height:70px;margin-bottom:12px;box-sizing:border-box;"></textarea>
 
@@ -521,7 +505,6 @@
 
     </div>
 
-    <!-- Coluna direita: mapa -->
     <div style="display:flex;flex-direction:column;gap:14px;">
       <div class="card" style="flex:1;">
         <h3>🗺️ Mapa — Pontos mais próximos</h3>
@@ -552,7 +535,6 @@
     </div>
   </div>
 
-  <!-- Modal de confirmação (enfeite visual) -->
   <div id="campo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
     <div style="background:white;border-radius:20px;padding:32px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
       <div style="font-size:3rem;margin-bottom:12px;">✅</div>
@@ -563,18 +545,12 @@
     </div>
   </div>
 
-</div><!-- fim painel-campo -->
-
-<!-- ══════════════════════════════════════════════════════════════ -->
-<!-- PAINEL 4: POPULAÇÃO                                          -->
-<!-- ══════════════════════════════════════════════════════════════ -->
-<div class="perfil-painel" id="painel-populacao">
+</div><div class="perfil-painel" id="painel-populacao">
   <div class="perfil-header">
     <h2>De Olho no Lixo — Portal do Cidadão</h2>
     <p>Denuncie pontos de lixo · Acompanhe as limpezas · Itamaracá mais limpa com sua ajuda</p>
   </div>
 
-  <!-- Números de impacto -->
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
     <div style="background:linear-gradient(135deg,#1B6B3C,#2e8b5a);border-radius:14px;padding:16px;text-align:center;color:white;">
       <div style="font-size:2rem;font-weight:700;font-family:'Fredoka',sans-serif;">308</div>
@@ -591,11 +567,9 @@
   </div>
 
   <div class="grid2">
-    <!-- Coluna esquerda: formulário de denúncia -->
     <div class="card">
       <h3>📢 Denunciar ponto de lixo</h3>
 
-      <!-- Upload foto com preview -->
       <input type="file" id="pop-foto-input" accept="image/*" capture="environment" style="display:none;" onchange="popPreviewFoto(this)">
       <div id="pop-foto-area" onclick="document.getElementById('pop-foto-input').click()"
         style="border:2px dashed #f0c4b4;border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:#fff8f6;margin-bottom:14px;transition:all 0.2s;position:relative;"
@@ -609,7 +583,6 @@
         <div id="pop-foto-tag" style="display:none;position:absolute;bottom:10px;right:10px;background:#1B6B3C;color:white;font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700;">✅ Foto adicionada</div>
       </div>
 
-      <!-- GPS -->
       <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:12px;padding:11px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;border:1px solid #c8e6c9;">
         <span style="font-size:1.1rem;">📍</span>
         <div style="flex:1;">
@@ -619,12 +592,10 @@
         <span style="width:8px;height:8px;border-radius:50%;background:#1B6B3C;display:inline-block;animation:pulse 2s infinite;"></span>
       </div>
 
-      <!-- Descrição -->
-      <label style="font-size:0.72rem;font-weight:700;color:var(--text2);display:block;margin-bottom:4px;">Descrição do problema</label>
+      <label style="font-size:0.72rem;font-weight:700;color:var(--text2);display:block;margin-bottom:4px;">Descrição do problem</label>
       <textarea rows="3" placeholder="Ex: Acúmulo de lixo na calçada, próximo ao mercado da esquina..."
         style="width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:0.82rem;font-family:inherit;resize:none;margin-bottom:10px;box-sizing:border-box;"></textarea>
 
-      <!-- Tipo -->
       <label style="font-size:0.72rem;font-weight:700;color:var(--text2);display:block;margin-bottom:4px;">Tipo de resíduo</label>
       <select style="width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:0.82rem;font-family:inherit;margin-bottom:14px;background:white;">
         <option>🗑️ Lixo doméstico</option>
@@ -640,7 +611,6 @@
       </button>
     </div>
 
-    <!-- Coluna direita: mapa + acompanhamento -->
     <div style="display:flex;flex-direction:column;gap:14px;">
 
       <div class="card">
@@ -678,7 +648,6 @@
     </div>
   </div>
 
-  <!-- Modal de sucesso denúncia -->
   <div id="pop-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
     <div style="background:white;border-radius:20px;padding:32px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
       <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
@@ -707,7 +676,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
-<!-- Overlay foto ampliada (compartilhado) -->
 <div id="foto-overlay-pref" onclick="fecharFotoPref()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out;">
   <img id="foto-overlay-pref-img" src="" alt="Foto" style="max-width:95vw;max-height:92vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6);">
 </div>
@@ -803,7 +771,6 @@ async function iniciarMapaAdmin() {
   }).addTo(map);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
     { maxZoom:19, pane:'overlayPane' }).addTo(map);
-
   const pontos = await _getPontos().catch(()=>[]);
   document.getElementById('admin-chip-total').textContent = pontos.length + ' pontos registrados';
 
@@ -863,7 +830,6 @@ async function iniciarMapaAdmin() {
     };
     menuWrap.appendChild(btn);
   });
-
   setTimeout(() => map.invalidateSize(), 200);
 }
 
@@ -908,7 +874,6 @@ async function iniciarMapaPopulacao() {
 
 // Inicia admin ao abrir a página (aba padrão)
 document.addEventListener('DOMContentLoaded', () => setTimeout(iniciarMapaAdmin, 300));
-
 const PREF_SHEET_ID  = '1Q9hG2uVnnP0kbKCdiVjUWwhW6Bi9TjajEYXS0dlZMsk';
 const PREF_SHEET_ABA = 'Coordenadas';
 
@@ -931,7 +896,7 @@ function fecharFotoPref() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharFotoPref(); });
 
-// Adicionado parâmetro 'corFixa' para permitir forçar a cor na Prefeitura
+// Modificada para opcionalmente renderizar com cor única
 function prefPopupHtml(p, corFixa = null) {
   const cor = corFixa ? corFixa : prefCorDoGrupo(p.grupo);
   const fotoHtml = p.foto_url
@@ -953,7 +918,7 @@ function prefPopupHtml(p, corFixa = null) {
     </div>`;
 }
 
-// Adicionado parâmetro 'corFixa' aqui também
+// Modificada para opcionalmente renderizar com cor única
 function prefCriarCamada(map, lista, corFixa = null) {
   const camada = L.layerGroup();
   lista.forEach(p => {
@@ -969,10 +934,30 @@ function prefCriarCamada(map, lista, corFixa = null) {
   return camada;
 }
 
+async function prefCarregarPontos() {
+  const url = `https://docs.google.com/spreadsheets/d/${PREF_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(PREF_SHEET_ABA)}`;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('Falha ao buscar planilha');
+  const texto = await resp.text();
+  const json  = JSON.parse(texto.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+  return json.table.rows.map(row => ({
+    grupo:     String(row.c[0]?.v ?? ''),
+    foto:      String(row.c[1]?.v ?? ''),
+    latitude:  parseFloat(row.c[2]?.v),
+    longitude: parseFloat(row.c[3]?.v),
+    data:      String(row.c[4]?.v ?? ''),
+    hora:      String(row.c[5]?.v ?? ''),
+    foto_url:  String(row.c[6]?.v ?? ''),
+  })).filter(p => !isNaN(p.latitude) && !isNaN(p.longitude));
+}
+
+let prefMapaIniciado = false;
+let prefMapaObj = null;
+let prefCamadaAtiva = null;
+
 function iniciarMapaPrefeitura() {
   if (prefMapaIniciado) { if (prefMapaObj) prefMapaObj.invalidateSize(); return; }
   prefMapaIniciado = true;
-
   const map = L.map('mapa-prefeitura').setView([-7.75, -34.83], 13);
   prefMapaObj = map;
 
@@ -982,17 +967,16 @@ function iniciarMapaPrefeitura() {
   const tileLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
     maxZoom:19, pane:'overlayPane'
   });
-
-  // Usando _getPontos() que já existe no código para buscar os dados corretamente
-  _getPontos().then(pontos => {
-    // 1. Número cravado em 400 pontos
+  prefCarregarPontos().then(pontos => {
+    // Cravando em 400 pontos
     document.getElementById('pref-chip-total').textContent = '400 pontos registrados';
 
     const grupos = [...new Set(pontos.map(p => p.grupo))].sort();
     
-    // 2. Cor vermelha fixa para todos os pontos deste mapa
-    const corPrefeitura = '#E53E3E'; 
+    // Cor vermelha definida para a prefeitura
+    const corPrefeitura = '#E53E3E';
 
+    // Gerando camadas idênticas ao Admin, porém enviando a cor fixa vermelha
     const camadaTodos = prefCriarCamada(map, pontos, corPrefeitura);
     const camadasPorGrupo = {};
     grupos.forEach(g => { camadasPorGrupo[g] = prefCriarCamada(map, pontos.filter(p => p.grupo === g), corPrefeitura); });
@@ -1011,11 +995,12 @@ function iniciarMapaPrefeitura() {
       map.fitBounds(_prefBounds, { padding:[40,40] });
     }
 
+    // Botões de filtro idênticos ao Admin, porém estilizados em vermelho
     const menuWrap = document.getElementById('pref-menu-wrap');
     const btnStyle = (ativo) => `cursor:pointer;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;border:none;background:${ativo?corPrefeitura:'#edf2f7'};color:${ativo?'white':'#4a5568'};`;
     
     const btnTodos = document.createElement('button');
-    btnTodos.textContent = '📍 Todos (400)'; 
+    btnTodos.textContent = '📍 Todos (400)';
     btnTodos.style.cssText = btnStyle(true);
     btnTodos.onclick = () => {
       if (prefCamadaAtiva) map.removeLayer(prefCamadaAtiva);
@@ -1035,7 +1020,6 @@ function iniciarMapaPrefeitura() {
       btnCalor.style.cssText = btnStyle(true);
     };
     menuWrap.appendChild(btnCalor);
-
     grupos.forEach(g => {
       const qtd = pontos.filter(p => p.grupo === g).length;
       const btn = document.createElement('button');
@@ -1049,13 +1033,11 @@ function iniciarMapaPrefeitura() {
       };
       menuWrap.appendChild(btn);
     });
-
   }).catch(err => {
     document.getElementById('pref-chip-total').style.display = 'none';
     document.getElementById('pref-chip-erro').style.display = '';
     document.getElementById('pref-chip-erro').textContent = '⚠️ ' + err.message;
   });
-
   setTimeout(() => map.invalidateSize(), 200);
 }
 
