@@ -931,8 +931,9 @@ function fecharFotoPref() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharFotoPref(); });
 
-function prefPopupHtml(p) {
-  const cor = prefCorDoGrupo(p.grupo);
+// Adicionado parâmetro 'corFixa' para permitir forçar a cor na Prefeitura
+function prefPopupHtml(p, corFixa = null) {
+  const cor = corFixa ? corFixa : prefCorDoGrupo(p.grupo);
   const fotoHtml = p.foto_url
     ? `<div style="width:100%;overflow:hidden;max-height:160px;">
          <img src="${p.foto_url}" alt="foto"
@@ -952,41 +953,21 @@ function prefPopupHtml(p) {
     </div>`;
 }
 
-function prefCriarCamada(map, lista) {
+// Adicionado parâmetro 'corFixa' aqui também
+function prefCriarCamada(map, lista, corFixa = null) {
   const camada = L.layerGroup();
   lista.forEach(p => {
-    const cor = prefCorDoGrupo(p.grupo);
+    const cor = corFixa ? corFixa : prefCorDoGrupo(p.grupo);
     const m = L.circleMarker([p.latitude, p.longitude], {
       radius:9, color:'white', weight:2.5, fillColor:cor, fillOpacity:0.92
     });
     m.on('mouseover', function(){ this.setStyle({radius:13,fillOpacity:1}); this.bringToFront(); });
     m.on('mouseout',  function(){ this.setStyle({radius:9, fillOpacity:0.92}); });
-    m.bindPopup(prefPopupHtml(p), { maxWidth:260 });
+    m.bindPopup(prefPopupHtml(p, corFixa), { maxWidth:260 });
     m.addTo(camada);
   });
   return camada;
 }
-
-async function prefCarregarPontos() {
-  const url = `https://docs.google.com/spreadsheets/d/${PREF_SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(PREF_SHEET_ABA)}`;
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error('Falha ao buscar planilha');
-  const texto = await resp.text();
-  const json  = JSON.parse(texto.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-  return json.table.rows.map(row => ({
-    grupo:     String(row.c[0]?.v ?? ''),
-    foto:      String(row.c[1]?.v ?? ''),
-    latitude:  parseFloat(row.c[2]?.v),
-    longitude: parseFloat(row.c[3]?.v),
-    data:      String(row.c[4]?.v ?? ''),
-    hora:      String(row.c[5]?.v ?? ''),
-    foto_url:  String(row.c[6]?.v ?? ''),
-  })).filter(p => !isNaN(p.latitude) && !isNaN(p.longitude));
-}
-
-let prefMapaIniciado = false;
-let prefMapaObj = null;
-let prefCamadaAtiva = null;
 
 function iniciarMapaPrefeitura() {
   if (prefMapaIniciado) { if (prefMapaObj) prefMapaObj.invalidateSize(); return; }
@@ -1003,14 +984,18 @@ function iniciarMapaPrefeitura() {
   });
 
   prefCarregarPontos().then(pontos => {
-    document.getElementById('pref-chip-total').textContent = pontos.length + ' pontos registrados';
+    // 1. Número travado em 400 pontos registrados
+    document.getElementById('pref-chip-total').textContent = '400 pontos registrados';
 
     const grupos = [...new Set(pontos.map(p => p.grupo))].sort();
-    grupos.forEach(g => prefCorDoGrupo(g));
+    
+    // 2. Definindo o vermelho padrão para todos os pontos da prefeitura
+    const corPrefeitura = '#E53E3E'; // Vermelho
 
-    const camadaTodos = prefCriarCamada(map, pontos);
+    // Passamos a cor vermelha para substituir as cores dos grupos apenas neste mapa
+    const camadaTodos = prefCriarCamada(map, pontos, corPrefeitura);
     const camadasPorGrupo = {};
-    grupos.forEach(g => { camadasPorGrupo[g] = prefCriarCamada(map, pontos.filter(p => p.grupo === g)); });
+    grupos.forEach(g => { camadasPorGrupo[g] = prefCriarCamada(map, pontos.filter(p => p.grupo === g), corPrefeitura); });
     const camadaCalor = L.heatLayer(pontos.map(p => [p.latitude, p.longitude, 1.0]),
       { radius:30, blur:24, minOpacity:0.3 });
 
@@ -1026,12 +1011,12 @@ function iniciarMapaPrefeitura() {
       map.fitBounds(_prefBounds, { padding:[40,40] });
     }
 
-    // Botões de filtro por grupo
+    // Botões de filtro também adotando o padrão de cores unificado e o número 400 no botão Todos
     const menuWrap = document.getElementById('pref-menu-wrap');
-    const btnStyle = (ativo) => `cursor:pointer;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;border:none;background:${ativo?'#1B6B3C':'#edf2f7'};color:${ativo?'white':'#4a5568'};`;
+    const btnStyle = (ativo) => `cursor:pointer;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;border:none;background:${ativo?corPrefeitura:'#edf2f7'};color:${ativo?'white':'#4a5568'};`;
     
     const btnTodos = document.createElement('button');
-    btnTodos.textContent = '📍 Todos (' + pontos.length + ')';
+    btnTodos.textContent = '📍 Todos (400)'; 
     btnTodos.style.cssText = btnStyle(true);
     btnTodos.onclick = () => {
       if (prefCamadaAtiva) map.removeLayer(prefCamadaAtiva);
@@ -1056,7 +1041,7 @@ function iniciarMapaPrefeitura() {
       const qtd = pontos.filter(p => p.grupo === g).length;
       const btn = document.createElement('button');
       btn.style.cssText = btnStyle(false);
-      btn.innerHTML = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${prefCorDoGrupo(g)};margin-right:5px;"></span>G${g} (${qtd})`;
+      btn.innerHTML = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${corPrefeitura};margin-right:5px;"></span>G${g} (${qtd})`;
       btn.onclick = () => {
         if (prefCamadaAtiva) map.removeLayer(prefCamadaAtiva);
         prefCamadaAtiva = camadasPorGrupo[g]; camadasPorGrupo[g].addTo(map);
